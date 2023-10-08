@@ -1,35 +1,31 @@
-﻿Solution sl = new Solution();
+﻿Console.WriteLine(GuessNumber(2126753390));
 
-Console.WriteLine(sl.PredictPartyVictory("DDD"));
+int GuessNumber(int n) {
+    return findNumber(1, n);
+}
 
-
-public class Solution {
-    public string PredictPartyVictory(string senate) {
-
-
-        while (senate.Length > 1)
-        {
-            if (senate[0] == 'R')
-            {
-                if(senate.Contains('D'))
-                    senate.Remove(senate.IndexOf('D'), 1);
-                    senate =
-                else
-                    return "Radiant";
-            }
-            else
-            {
-                if (senate.Contains('R'))
-                    senate.Remove(senate.IndexOf('R'), 1);
-                else
-                    return "Dire";
-            }
-        }
-        
-        if (senate[0] == 'D')
-            return "Dire";
-        else
-            return "Radiant";
+int findNumber(int min, int max) {
+    int n = max;
+    if (guess(n) == 0) {
+        return n;
     }
-    
+    n = ((max - min) / 2) + min; 
+    Console.WriteLine(n);
+    if (guess(n) == -1) {
+        return findNumber(min, n);
+    } else if (guess(n) == 1) {
+        return findNumber(n, max);
+    }
+    return n;
+}
+
+int guess(int n) { 
+    int numToFind = 1702766719;
+    if (n == numToFind){
+        return 0;
+    } else if (n > numToFind) {
+        return -1;
+    } else {
+        return 1;
+    }
 }
